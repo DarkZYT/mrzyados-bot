@@ -12,6 +12,7 @@ client.on('message', msg => {
 	if (msg.author.muted == true) {msg.delete(); msg.reply("You're muted"); return;}
     message = msg.content.trim();
 	if (msg.channel.type === "dm") {return;}
+	if(msg.guild.name === "NightFallerLegendsCommunity"){return;}
 	if ((msg.guild.commandPrefix == null)) {msg.guild.commandPrefix = "_"};
     if (message.toLowerCase().startsWith(msg.guild.commandPrefix.toLowerCase())) {
       const command = message.substring(msg.guild.commandPrefix.length).split(/[ \n]/)[0].toLowerCase().trim();
@@ -144,8 +145,10 @@ client.on('ready', () => {
     console.log('Bot got ready , join now discord!')
 });
 client.on('message', message => {
+	
 	if (message.author.muted == true) {return;}
     if (message.channel.type !== "dm") {
+	    if(message.guild.name === "NightFallerLegendsCommunity"){return;}
     if (message.guild.commandPrefix == null) {message.guild.commandPrefix = "_"};
     if ((message.content.startsWith(message.guild.commandPrefix)) && (message.channel.type !== "dm"))
     {
@@ -609,7 +612,7 @@ client.on('message', message => {
 }});
 
 client.on('guildMemberAdd' , member => {
-
+	if(member.guild.name === "NightFallerLegendsCommunity"){return;}
 	if(member.bot == true)
 	{
 		if (member.guild.greetingChannel != null)
@@ -640,7 +643,7 @@ client.on('guildMemberAdd' , member => {
 });
 
 client.on('guildMemberRemove' , member => {
-
+	if(member.guild.name === "NightFallerLegendsCommunity"){return;}
 	if(member.bot == true)
 	{
 		if (member.guild.greetingChannel != null)
